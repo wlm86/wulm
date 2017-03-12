@@ -1,24 +1,19 @@
 # Site settings
-title: 闫肃的博客
-email: suyan0830@gmail.com
+title: xqk的博客
+email: hnxqk@sina.com
 description: > # this means to ignore newlines until "baseurl:"
-  闫肃的博客
+  xqk的博客
 baseurl: "" # the subpath of your site, e.g. /blog/
-url: http://yansu.org # the base hostname & protocol for your site
+url: http://qkxu.github.io # the base hostname & protocol for your site
 rss_url: /pages/feed.xml
-author: Su Yan
-
+author: xqk
 # Sidebar filter
 # Choose 'tag' or 'category' as filter in sidebar.
 filter: 'category'
 recent_num: 20
 
 # Social account
-twitter: masonsuyan
-weibo: suyan0830
-github: suyan
-instagram: suyan0830
-linkedin: suyan0830
+github: qkxu
 
 # avatar and Favicon
 avatar: http://7u2ho6.com1.z0.glb.clouddn.com/site-avatar.png
