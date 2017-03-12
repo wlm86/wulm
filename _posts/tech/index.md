@@ -5,5 +5,5 @@ category: 工具
 tags: Mac
 description: Zsh在使用一段时间以后，确实是不错，这个过程逐渐完善吧
 ---
-GGGGGGGGGGGGGGGGggggg
-g
+## debug过程
+zddddddddddddd
