@@ -9,7 +9,7 @@ description: Ceilometer 源码学习 - API组件
 
 ceilometer API是基于HTTP协议，使用JSON格式的RESTful API。
 
- ###1.**入口**
+ ###1.入口
 
 - Ceilometer采用[pbr](http://docs.openstack.org/developer/pbr/)的方式管理配置，
 - setup.cfg中定义了Polling Agent 入口位置，如下：
@@ -20,7 +20,7 @@ console_scripts =
     ...
 ```
 
-### 2. **ceilometer.cmd.api:main**
+### 2. ceilometer.cmd.api:main
 
 在ceilometer/cmd/collector.py 文件中找到该函数，如下：
 
@@ -34,7 +34,7 @@ def main():
 - 第二句为核心，加载了app，并启动wsgi服务。
 
 
-###3. **启动组件**
+###3. 启动组件
 
 ```
 def build_server():

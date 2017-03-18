@@ -19,7 +19,7 @@ Aodh组件主要是处理与告警相关的功能，是从原先的ceilometer-al
 
 
 
- ###1.**组件组成**
+ ###1.组件组成
 
 - 脚本为console_scripts 配置项中的值，启动时配置启动aodh-api、aodh-evaluator、aodh-listener、aodh-notifier
 
@@ -34,7 +34,7 @@ console_scripts =
     aodh-data-migration = aodh.cmd.data_migration:main
 ```
 
-###2. **aodh-api**
+###2. aodh-api
 
 与其他组件一样，统一使用wsgi框架启动app以及服务，最终会调用到aodh\api\controllers\v2\root.py：
 
@@ -52,7 +52,7 @@ class V2Controller(object):
 - CapabilitiesController提供查询底层storage对于api支持的能力。
 
 
-###3. **aodh-evaluator**
+###3. aodh-evaluator
 
 查看脚本起始调用：
 
@@ -178,7 +178,7 @@ else:
     self.notifier = queue.AlarmNotifier(self.conf)
 ```
 
-###4.**aodh-listener**
+###4.aodh-listener
 
 启动脚本
 
@@ -249,7 +249,7 @@ def _evaluate_alarm(self, alarm, event):
     self._fire_alarm(alarm, event)
 ```
 
-###5.**aodh-notifier**
+###5.aodh-notifier
 
 启动脚本
 
@@ -328,7 +328,7 @@ def _handle_action(notifiers, action, alarm_id, alarm_name, severity,
         return
 ```
 
-###6.**注意点**
+###6.注意点
 
 - 在aodh-evaluator中，如果是gnocchi类型的告警评估，在_statistics函数会调用gnocchi_client来获取数据，而不是从ceilometer的api获取。
 
