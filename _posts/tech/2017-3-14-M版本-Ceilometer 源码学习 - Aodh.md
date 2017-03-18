@@ -1,9 +1,9 @@
 ---
 layout: post
-title: 从Bash切换到Zsh
-category: 工具
-tags: Mac
-description: Zsh在使用一段时间以后，确实是不错，这个过程逐渐完善吧
+title: Ceilometer 源码学习 - Aodh组件
+category: telemetry
+tags: aodh
+description: Ceilometer 源码学习 - Aodh组件
 ---
 
 # Ceilometer 源码学习 - Aodh组件#
@@ -34,7 +34,7 @@ console_scripts =
     aodh-data-migration = aodh.cmd.data_migration:main
 ```
 
-### 2. **aodh-api**
+###2. **aodh-api**
 
 与其他组件一样，统一使用wsgi框架启动app以及服务，最终会调用到aodh\api\controllers\v2\root.py：
 
@@ -178,7 +178,7 @@ else:
     self.notifier = queue.AlarmNotifier(self.conf)
 ```
 
-### **4.aodh-listener**
+###4.**aodh-listener**
 
 启动脚本
 
@@ -249,7 +249,7 @@ def _evaluate_alarm(self, alarm, event):
     self._fire_alarm(alarm, event)
 ```
 
-###4.aodh-notifier
+###5.**aodh-notifier**
 
 启动脚本
 
@@ -328,7 +328,7 @@ def _handle_action(notifiers, action, alarm_id, alarm_name, severity,
         return
 ```
 
-###5.注意点
+###6.**注意点**
 
 - 在aodh-evaluator中，如果是gnocchi类型的告警评估，在_statistics函数会调用gnocchi_client来获取数据，而不是从ceilometer的api获取。
 
@@ -342,5 +342,3 @@ def _handle_action(notifiers, action, alarm_id, alarm_name, severity,
 - combination 组合告警 与其他告警一起通过逻辑条件来生成，针对多个告警进行组合
 
   composite 复合告警 是通过不同的告警触发条件来生成告警，针对单个条件来组成单个告警
-
-  ​
