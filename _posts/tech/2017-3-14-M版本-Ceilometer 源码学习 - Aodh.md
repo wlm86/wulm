@@ -10,7 +10,7 @@ description: Ceilometer 源码学习 - Aodh组件
 
 Aodh组件主要是处理与告警相关的功能，是从原先的ceilometer-alarm组件中独立出来，专门成立的Aodh组件。数据流程如下： 
 
- ![绘图aodh](https://img3.doubanio.com/view/photo/photo/y-RZR9IOOgwtVWowi8nspA/37339848/x2447782251.jpg)
+ ![cover](https://img3.doubanio.com/view/photo/photo/public/p2447782251.jpg)
 
 - aodh-evaluator  根据告警类型从ceilometer接口中或者gnochhi中获取，当数据触发告警规则时将告警发送到rpc或者notification
 - aodh-listener   定义了监控event的告警，数据是从直接监听notification中获取，当监听的event触发告警时发送到rpc或者notification
