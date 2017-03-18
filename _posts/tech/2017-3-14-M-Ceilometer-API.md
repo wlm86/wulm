@@ -9,7 +9,7 @@ description: Ceilometer 源码学习 - API组件
 
 ceilometer API是基于HTTP协议，使用JSON格式的RESTful API。
 
- ### 1.入口
+### 1.入口
 
 - Ceilometer采用[pbr](http://docs.openstack.org/developer/pbr/)的方式管理配置，
 - setup.cfg中定义了Polling Agent 入口位置，如下：
