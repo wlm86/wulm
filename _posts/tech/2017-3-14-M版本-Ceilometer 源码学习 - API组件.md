@@ -169,11 +169,10 @@ def build_server():
 
   get_one函数是pecan定义获取单个对象的接口，因此会调用get_one进行处理。
 
-  ​
 
-  注意点：
+###4.注意点：
 
-  - 需要注意的修饰类
+-   需要注意的修饰类
 
   ```
   pecan.decorators.expose(template=None,
