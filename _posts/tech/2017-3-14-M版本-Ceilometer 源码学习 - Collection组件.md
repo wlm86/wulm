@@ -214,7 +214,9 @@ def batch_measures(self, measures, resource_infos, stats):
             resource = resource_infos[gnocchi_id]['resource']
             resource_type = resource_infos[gnocchi_id]['resource_type']
             try:
-            #首先会创建resoure，创建resource会带有resource_type，在gnocchi初始化时要执行gnocchi-               #upgrade，或者在ceilometer组件中初始化时执行ceilometer-upgrade用于创建resource_type
+            #首先会创建resoure，创建resource会带有resource_type，在gnocchi初始化时要执行
+            #gnocchi-upgrade，或者在ceilometer组件中初始化时执行ceilometer-upgrade用于创建
+            #resource_type
                 self._if_not_cached("create", resource_type, resource,
                                     self._create_resource)
             except gnocchi_exc.ResourceAlreadyExists:
