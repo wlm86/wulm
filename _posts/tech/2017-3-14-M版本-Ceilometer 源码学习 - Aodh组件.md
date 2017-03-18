@@ -2,7 +2,7 @@
 layout: post
 title: Ceilometer 源码学习 - Aodh组件
 category: telemetry
-tags: aodh
+tags: ceilometer
 description: Ceilometer 源码学习 - Aodh组件
 ---
 

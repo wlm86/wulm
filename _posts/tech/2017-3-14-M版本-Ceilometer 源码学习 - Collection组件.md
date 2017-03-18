@@ -1,8 +1,15 @@
+---
+layout: post
+title: Ceilometer 源码学习 - Collection组件
+category: telemetry
+tags: ceilometer
+description: Ceilometer 源码学习 - Collection组件
+---
 # Ceilometer 源码学习 - Collection组件#
 
 collection组件主要是通过mq以及udp采集sample，并存储到相应的位置（数据库、file、gnocchi等）
 
- ### 1.**入口**
+### 1.**入口**
 
 - Ceilometer采用[pbr](http://docs.openstack.org/developer/pbr/)的方式管理配置，
 - setup.cfg中定义了Polling Agent 入口位置，如下：

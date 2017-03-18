@@ -1,3 +1,10 @@
+---
+layout: post
+title: Ceilometer 源码学习 - Polling Agent
+category: telemetry
+tags: ceilometer
+description: Ceilometer 源码学习 - Polling Agent组件
+---
 # Ceilometer 源码学习 - Polling Agent
 
 ## 简介
@@ -8,7 +15,7 @@ Ceilometer是Openstack中用于数据采集的基础设施，包括多个组件�
 
 Polling Agent的功能很简单：
 
-> **周期性地向其他服务主动拉取需要的数据，并将数据发送到消息队列。**
+**周期性地向其他服务主动拉取需要的数据，并将数据发送到消息队列。**
 
 其结构图如下： ![图1 Central Agent结构图](http://docs.openstack.org/developer/ceilometer/_images/2-2-collection-poll.png)
 
