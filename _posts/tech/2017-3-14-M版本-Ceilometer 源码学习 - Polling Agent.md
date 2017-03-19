@@ -432,4 +432,4 @@ class EndpointDiscovery(plugin.DiscoveryBase):
 
 Github：[Ceilometer Source Code](https://github.com/openstack/ceilometer)
 
- [Ceilometer 源码学习 - Polling Agent](http://catkang.github.io/2015/11/03/source-ceilometer-polling.html)
+ [Ceilometer 源码学习 - Polling Agent](https://catkang.github.io/2015/11/16/source-ceilometer-notification.html)（作者：catkang）
