@@ -1,11 +1,11 @@
 ---
 layout: post
-title: Ceilometer 源码学习 - API组件
+title: Ceilometer 源码学习 - API
 category: telemetry
 tags: ceilometer
-description: Ceilometer 源码学习 - API组件
+description: Ceilometer 源码学习 - API
 ---
-# Ceilometer 源码学习 - API组件#
+# Ceilometer 源码学习 - API#
 
 ceilometer API是基于HTTP协议，使用JSON格式的RESTful API。
 
