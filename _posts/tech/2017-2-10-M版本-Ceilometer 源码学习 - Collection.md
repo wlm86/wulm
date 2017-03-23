@@ -164,6 +164,8 @@ for resource_id, samples_of_resource in resource_grouped_samples:
         samples = list(samples)
         #从gnocchi_resources.yaml中读取gnocchi接受的资源，包括resource_type、
         #metrics、attributes，如果在此文件中未定义的meter将会被忽略。
+        #特别注意，根据metric_name会得到匹配的某一个resource，然后将resource中
+        #定义的metric全部添加进去（rd.metrics），即使此次sample中并不包含此metric项
         rd = self._get_resource_definition_from_metric(metric_name)
         if rd is None:
             LOG.warning(_LW("metric %s is not handled by Gnocchi") %
@@ -185,9 +187,22 @@ for resource_id, samples_of_resource in resource_grouped_samples:
             ...
             unit = sample['counter_unit']
             metric = sample['counter_name']
+            #对于首次发送数据，batch_measures方法会走异常分支，
+            #然后创建resource，本次sample中包含的metric项拥有unit，其余的都unit为Null。
             res_info['resource']['metrics'][metric]['unit'] = unit
 
         ...
+        for gnocchi_id, info in gnocchi_data.items():
+            resource = info["resource"]
+            resource_type = info["resource_type"]
+            resource_extra = info["resource_extra"]
+            if not resource_extra:
+                continue
+            try:
+                #当此资源中包含其余的metic的sample时，更新resource，此时上文中unit这些项才有
+                #真正的单位，而不是Null
+                self._if_not_cached("update", resource_type, resource,
+                                    self._update_resource, resource_extra)
 ```
 
 然后调用  self.batch_measures(measures, gnocchi_data, stats)来发送数据。
@@ -201,6 +216,7 @@ def batch_measures(self, measures, resource_infos, stats):
         self._gnocchi.metric.batch_resources_metrics_measures(measures)
     except gnocchi_exc.BadRequest as e:
         #首次发送数据时，metric在gnocchi中还不存在，因此会进入异常分支
+        #resource_infos中包含了所有的metric项
         m = self.RE_UNKNOW_METRICS.match(six.text_type(e))
         if m is None:
             raise
@@ -214,9 +230,10 @@ def batch_measures(self, measures, resource_infos, stats):
             resource = resource_infos[gnocchi_id]['resource']
             resource_type = resource_infos[gnocchi_id]['resource_type']
             try:
-            #首先会创建resoure，创建resource会带有resource_type，在gnocchi初始化时要执行
-            #gnocchi-upgrade，或者在ceilometer组件中初始化时执行ceilometer-upgrade用于创建
-            #resource_type
+            #首先会创建resoure，创建resource会带有resource_type，在gnocchi初始化时要执行gnocchi-               #upgrade，或者在ceilometer组件中初始化时执行ceilometer-upgrade用于创建resource_type
+            #创建resource时会将resource的metric一并创建，在gnocchi中metric是属
+            #于resource资源中的一个属性，meteric对应于meter，resource中可以包含多个metric
+            #gnocchi resource show查看
                 self._if_not_cached("create", resource_type, resource,
                                     self._create_resource)
             except gnocchi_exc.ResourceAlreadyExists:
@@ -224,8 +241,7 @@ def batch_measures(self, measures, resource_infos, stats):
                           'name': metric_name}
                 metric.update(resource["metrics"][metric_name])
                 try:
-                    #创建metric，在gnocchi中metric是属于resource资源中的一个属性，meteric对
-                    #应于meter，resource中可以包含多个metric，可以用gnocchi resource show查看
+                    #此分支一般不会进入
                     self._gnocchi.metric.create(metric)
                 ...
         # NOTE(sileht): we have created missing resources/metrics,
