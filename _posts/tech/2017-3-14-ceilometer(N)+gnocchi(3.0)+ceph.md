@@ -8,18 +8,14 @@ description: ceilometer(N)+gnocchi(3.0)+ceph集成
 # ceilometer(N)+gnocchi(3.0)+ceph集成
 
 - ## 安装gnocchi
+  - pip安装，可以参考官网文档，pip install gnocchi
+  - 源码安装 
+      - 官网下载源码包解压或者用git clone [https://github.com/openstack/gnocchi.git](https://github.com/openstack/gnocchi.git)
+      - cd gnocchi/ 
+      - pip install -r requirements.txt
+      - python setup.py install
 
-- pip安装，可以参考官网文档，pip install gnocchi
-
-- 源码安装 
-
-  - 官网下载源码包解压或者用git clone [https://github.com/openstack/gnocchi.git](https://github.com/openstack/gnocchi.git)
-  - cd gnocchi/ 
-  - pip install -r requirements.txt
-  - python setup.py install
-
-
-说明：源码安装最主要的是解决软件包依赖文件，gnocchi依赖软件包比较多，pandas、pytimeparse、Cython 、cradox 等，根据安装报错，下载相应的软件包安装即可。
+  说明：源码安装最主要的是解决软件包依赖文件，gnocchi依赖软件包比较多，pandas、pytimeparse、Cython 、cradox 等，根据安装报错，下载相应的软件包安装即可。
 
 - ## 准备数据库以及keystone鉴权
 
