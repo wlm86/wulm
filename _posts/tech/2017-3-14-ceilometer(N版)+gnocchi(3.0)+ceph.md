@@ -67,7 +67,7 @@ description: ceilometer（N版）+gnocchi（3.0）+ceph集成
   openstack endpoint create --region RegionOne metric admin http://192.168.2.203:8041
   ```
 
-- ##准备ceph存储
+- ## 准备ceph存储
 
   - 给gnocchi创建一个专用的ceph pool，用来存放计量数据。（ceph mon node）
     ceph osd pool create gnocchi 128 128
@@ -90,7 +90,7 @@ description: ceilometer（N版）+gnocchi（3.0）+ceph集成
 
   ​
 
-- ##配置
+- ## 配置
 
 - 配置ceilometer
 
@@ -192,7 +192,7 @@ description: ceilometer（N版）+gnocchi（3.0）+ceph集成
 
   ​
 
-- ##启动
+- ## 启动
 
 - 初始化indexes数据库表以及storage
 
