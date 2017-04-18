@@ -256,8 +256,17 @@ def poll_and_notify(self):
     for source_name in self.pollster_matches:
        # 循环处理PollingTask中的每一个收集器Pollster
        for pollster in self.pollster_matches[source_name]:
-           ...
+           key = Resources.key(source_name, pollster)
+                candidate_res = list(
+                    self.resources[key].get(discovery_cache))
            # Discover发现可用的数据源
+           # 其中discovery_cache作用是用于缓存已经查询的资源，如果没有在pipeline
+           # 中指定discovery以及resource，则candidate_res为空
+           # discovery_cache在首次执行下面的函数后将会赋予缓存的资源，用于循环中相同的
+           # discovery_cach直接取得，不需要重复查询
+           # 另外一个作用discovery_cach在下次任务重复执行时，首次将被赋予赋值，以虚拟机为例：
+           # 每次查询仅需要变动的虚拟机，而不需要全量虚拟机，如果有变动的虚拟机，则更新
+           # discovery_cach。
            if not candidate_res and pollster.obj.default_discovery:
                 candidate_res = self.manager.discover(
                     [pollster.obj.default_discovery], discovery_cache)
