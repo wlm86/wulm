@@ -270,8 +270,31 @@ def poll_and_notify(self):
            if not candidate_res and pollster.obj.default_discovery:
                 candidate_res = self.manager.discover(
                     [pollster.obj.default_discovery], discovery_cache)
+                    
+                # Remove duplicated resources and black resources. Using
+                # set() requires well defined __hash__ for each resource.
+                # Since __eq__ is defined, 'not in' is safe here.
+                # 周期性任务是根据pipeline中的时间间隔进行分组，在同一组中如果出现同一个meter，
+                # 则第二次meter将会直接略过，因为polling_resources此时为空。
+                polling_resources = []
+                black_res = self.resources[key].blacklist
+                history = poll_history.get(pollster.name, [])
+                for x in candidate_res:
+                    if x not in history:
+                        history.append(x)
+                        if x not in black_res:
+                            polling_resources.append(x)
+                poll_history[pollster.name] = history
+                
+                # If no resources, skip for this pollster
+                if not polling_resources:
+                    p_context = 'new ' if history else ''
+                    LOG.info(_LI("Skip pollster %(name)s, no %(p_context)s"
+                                 "resources found this cycle"),
+                             {'name': pollster.name, 'p_context': p_context})
+                    continue
 
-            ...   #做一些过滤
+             ... 
 
              try:
                  # 从数据源处拉取采样数据
