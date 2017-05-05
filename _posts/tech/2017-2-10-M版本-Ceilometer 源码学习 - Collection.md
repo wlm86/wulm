@@ -230,7 +230,9 @@ def batch_measures(self, measures, resource_infos, stats):
             resource = resource_infos[gnocchi_id]['resource']
             resource_type = resource_infos[gnocchi_id]['resource_type']
             try:
-            #首先会创建resoure，创建resource会带有resource_type，在gnocchi初始化时要执行gnocchi-               #upgrade，或者在ceilometer组件中初始化时执行ceilometer-upgrade用于创建resource_type
+            #首先会创建resoure，创建resource会带有resource_type，在gnocchi初始化时要执行
+            #gnocchi-upgrade，或者在ceilometer组件中初始化时执行ceilometer-upgrade用于
+            #创建resource_type
             #创建resource时会将resource的metric一并创建，在gnocchi中metric是属
             #于resource资源中的一个属性，meteric对应于meter，resource中可以包含多个metric
             #gnocchi resource show查看

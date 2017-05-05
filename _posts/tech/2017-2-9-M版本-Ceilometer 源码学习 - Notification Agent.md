@@ -454,7 +454,7 @@ class SampleNotifierPublisher(NotifierPublisher):
 - 对应的类为EventSource, EventSink, EventPipeline, EventNotifierPublisher等。
 - 开关开启后会根据event_definitions.yaml中定义的监听任务生成event，并调用EventPipeline以及EventNotifierPublisher来处理
 
-###10.**注意点**
+### 10.**注意点**
 
 - 在polling中获取到的值会以以下方式发送
   _send_notification(self, samples):
