@@ -1,9 +1,9 @@
 ---
 layout: post
-title: ceilometer(N)+gnocchi(3.0)+ceph集成
+title: Ceilometer(N)+Gnocchi(3.0)+ceph集成
 category: telemetry
 tags: gnocchi
-description: ceilometer(N)+gnocchi(3.0)+ceph集成
+description: Ceilometer(N)+Gnocchi(3.0)+ceph集成
 ---
 # ceilometer(N)+gnocchi(3.0)+ceph集成
 
