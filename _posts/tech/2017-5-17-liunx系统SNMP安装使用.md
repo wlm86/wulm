@@ -124,16 +124,16 @@ SNMPv3中引入了下列三个安全级别：
   ```
   例如创建AuthNoPriv级别的用户
   ```
-  net-snmp-config --create-snmpv3-user -ro -A test123456 -a MD5 testuser
+  net-snmp-config --create-snmpv3-user -ro -A test123456 -a MD5 userAuthNoPriv
   回显为：
   adding the following line to /var/lib/net-snmp/snmpd.conf:
-     createUser testuser MD5 "test123456" DES
+     createUser userAuthNoPriv MD5 "test123456" DES
   adding the following line to /etc/snmp/snmpd.conf:
-     rouser testuser
+     rouser userAuthNoPriv
   ```
   例如创建AuthPriv级别的用户
   ```
-  net-snmp-config --create-snmpv3-user -ro -A test123456 -X test123456 -a MD5 -x DES testsnmpuser
+  net-snmp-config --create-snmpv3-user -ro -A test123456 -X test123456 -a MD5 -x DES userAuthPriv
   ```
 
 - 直接修改snmp.conf文件（/var/lib/net-snmp/snmpd.conf以及/etc/snmp/snmpd.conf），在文件末尾追加即可
@@ -142,21 +142,21 @@ SNMPv3中引入了下列三个安全级别：
 
   ```
   /var/lib/net-snmp/snmpd.conf:
-  createUser test123456 MD5 "test123456"
+  createUser userAuthNoPriv MD5 "test123456"
   /etc/snmp/snmpd.conf:
-  rouser test123456
+  rouser userAuthNoPriv
   /var/lib/net-snmp/snmpd.conf:
-  createUser test123456 MD5 "test123456" DES "test123456"
+  createUser userAuthPriv MD5 "test123456" DES "test123456"
   /etc/snmp/snmpd.conf：
-  rouser test123456
+  rouser userAuthPriv
   ```
 
   创建noAuthNoPriv级别的用户（net-snmp-config工具并没有提供创建此级别的用户）
   ```
   /var/lib/net-snmp/snmpd.conf:
-  createUser test123456
+  createUser usernoAuthNoPriv
   /etc/snmp/snmpd.conf：
-  rouser test123456 noauth
+  rouser testsnmpuser noauth
   ```
   更多的参数详情以及配置可以用 man snmpd.conf看到。
 
@@ -165,9 +165,9 @@ SNMPv3中引入了下列三个安全级别：
 测试snmpV3协议：
 ```
 AuthNoPriv级别：
-snmpwalk -v 3 -a MD5 -u testuser -A test123456 -l authNoPriv 127.0.0.1 .1.3.6.1.4.1.2021.4.5.0
+snmpwalk -v 3 -a MD5 -u userAuthNoPriv -A test123456 -l authNoPriv 127.0.0.1 .1.3.6.1.4.1.2021.4.5.0
 AuthPriv级别：
-snmpwalk -v 3 -a MD5 -u testuser -A test123456 -l authPriv -x DES -X test123456 127.0.0.1 .1.3.6.1.4.1.2021.4.5.0
+snmpwalk -v 3 -a MD5 -u userAuthPriv -A test123456 -l authPriv -x DES -X test123456 127.0.0.1 .1.3.6.1.4.1.2021.4.5.0
 其中参数含义如下：
 SNMP Version 3 specific
   -a PROTOCOL		set authentication protocol (MD5|SHA)
