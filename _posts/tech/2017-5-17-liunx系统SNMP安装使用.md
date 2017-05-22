@@ -167,7 +167,7 @@ SNMPv3中引入了下列三个安全级别：
 AuthNoPriv级别：
 snmpwalk -v 3 -a MD5 -u testuser -A test123456 -l authNoPriv 127.0.0.1 .1.3.6.1.4.1.2021.4.5.0
 AuthPriv级别：
-snmpwalk -v 3 -a MD5 -u testuser -A test123456 -l authNoPriv -x DES -X test123456 127.0.0.1 .1.3.6.1.4.1.2021.4.5.0
+snmpwalk -v 3 -a MD5 -u testuser -A test123456 -l authPriv -x DES -X test123456 127.0.0.1 .1.3.6.1.4.1.2021.4.5.0
 其中参数含义如下：
 SNMP Version 3 specific
   -a PROTOCOL		set authentication protocol (MD5|SHA)
@@ -176,7 +176,6 @@ SNMP Version 3 specific
   -u USER-NAME		set security name (e.g. bert)
   -x PROTOCOL		set privacy protocol (DES|AES)
   -X PASSPHRASE		set privacy protocol pass phrase
-
 ```
 
 ### 4.**关闭v1，v2协议版本**
