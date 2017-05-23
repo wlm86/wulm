@@ -1,11 +1,11 @@
 ---
 layout: post
-title: liunx系统SNMP安装使用
+title: centos系统SNMP安装使用
 category: telemetry
 tags: ceilometer
-description: liunx系统SNMP安装使用
+description: centos系统SNMP安装使用
 ---
-# liunx系统SNMP安装使用#
+# centos系统SNMP安装使用#
 
 ### 1.**SNMP介绍**
 
@@ -14,7 +14,6 @@ description: liunx系统SNMP安装使用
 ### 2.**安装SNMP**
   ```
   centos、redhat命令：yum install net-snmp* -y
-  ubuntu、debian命令：apt-get install net-snmp* -y
   ```
   当前版本用的是5.7.2。
 ### 3.**配置SNMP**
@@ -22,7 +21,6 @@ description: liunx系统SNMP安装使用
 
     ```
     centos命令： systemctl enable snmpd.service
-    其他liunx：  chkconfig snmpd on
     ```
 
 - 配置snmp文件
@@ -74,7 +72,6 @@ description: liunx系统SNMP安装使用
 
   ```
   centos命令： systemctl start snmpd.service
-  其他liunx:   service snmpd start
   ```
 - 测试snmp服务
   ```
