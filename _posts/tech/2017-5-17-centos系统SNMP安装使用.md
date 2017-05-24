@@ -2,7 +2,7 @@
 layout: post
 title: centos系统SNMP安装使用
 category: telemetry
-tags: ceilometer
+tags: snmp
 description: centos系统SNMP安装使用
 ---
 # centos系统SNMP安装使用#
