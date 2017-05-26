@@ -66,6 +66,10 @@ description: centos系统SNMP安装使用
   # Check the / partition and make sure it contains at least 10 megs.
 
   #disk / 10000  将此行的注释去掉即可
+
+  #注意这个配置只是个示例，用于标注采集磁盘的PATH，如果有多个挂载盘，可以配置多个
+  #例如 disk /dev 10000等
+  #includeAllDisks 10% 表示采集所有路径，其中10%是表示至少有10%的空余空间
   ```
 
 - 启动snmp服务
