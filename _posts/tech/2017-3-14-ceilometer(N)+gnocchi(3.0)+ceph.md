@@ -103,8 +103,11 @@ description: Ceilometer(N)+Gnocchi(3.0)+ceph集成
   [dispatcher_gnocchi]
   
   filter_project = service
+  
   filter_service_activity = False
+  
   archive_policy = low
+  
   url = http://192.168.2.203:8041
 
   ​
