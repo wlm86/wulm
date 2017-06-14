@@ -93,6 +93,7 @@ description: Ceilometer(N)+Gnocchi(3.0)+ceph集成
   主要配置三个地方，url是指gnocchi提供的api服务地址
 
   [DEFAULT]
+  
   meter_dispatchers = gnocchi
 
   [api]
@@ -100,11 +101,10 @@ description: Ceilometer(N)+Gnocchi(3.0)+ceph集成
   gnocchi_is_enable = True
 
   [dispatcher_gnocchi]
+  
   filter_project = service
   filter_service_activity = False
-
   archive_policy = low
-
   url = http://192.168.2.203:8041
 
   ​
