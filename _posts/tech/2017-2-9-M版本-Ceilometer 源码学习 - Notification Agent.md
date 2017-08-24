@@ -17,7 +17,7 @@ Ceilometer有两种数据收集方式，[Ceilometer 源码学习 - Polling Agent
 
 > **监听消息队列上其他Openstack组件产生的通知数据，加工处理后将数据发送出来**
 
-结构图如下： ![图1 Notification Agent结构图](http://docs.openstack.org/developer/ceilometer/_images/2-1-collection-notification.png)
+结构图如下： ![图1 Notification Agent结构图](https://github.com/qkxu/image/blob/master/2-1-collection-notification.png?raw=true)
 
 可以看出Notification Agent中需要完成下面这些事情：
 
@@ -34,8 +34,12 @@ Ceilometer有两种数据收集方式，[Ceilometer 源码学习 - Polling Agent
 得益于pipeline的处理方式，每一步数据处理都可以以插件的形式存在，自由的组合，并且不需要关心其他插件的所作所为。这些相互独立功能单一的插件可以划分为三个类型，分别对应上述提到的三个需求：
 
 1. **Notification插件**：监听消息队列上的某种通知数据；
-2. **Tranformer插件**：将获得的通知数据，按pipeline定义做某种转化处理，这些处理可能是聚合，可能是形式转化，看一下官方的示意图： ![图2 Tranform示意图](http://docs.openstack.org/developer/ceilometer/_images/4-Transformer.png)
+
+2. **Tranformer插件**：将获得的通知数据，按pipeline定义做某种转化处理，这些处理可能是聚合，可能是形式转化，看一下官方的示意图： ![图2 Tranform示意图](https://github.com/qkxu/image/blob/master/4-Transformer.png?raw=true)
+
 3. **Publisher插件**：将Tranformer处理后的数据发送到pipeline定义的地方。
+
+   ![图3 Publisher示意图](https://github.com/qkxu/image/blob/master/5-multi-publish.png?raw=true)
 
 这些插件按对应的namespace定义在setpy.cfg配置文件中，并通过[stevedore](http://docs.openstack.org/developer/stevedore/)在运行时动态加载。
 
@@ -453,6 +457,7 @@ class SampleNotifierPublisher(NotifierPublisher):
 - 与上述整套逻辑平行的，还有一套非常类似用来处理Event数据的逻辑；
 - 对应的类为EventSource, EventSink, EventPipeline, EventNotifierPublisher等。
 - 开关开启后会根据event_definitions.yaml中定义的监听任务生成event，并调用EventPipeline以及EventNotifierPublisher来处理
+- 此时同一个event（例如虚拟机删除事件）会产生sample（因为sample endpoint）以及event（因为event endpoint），当然此事件必须在各自的endpoint中定义处理。
 
 ### 10.**注意点**
 

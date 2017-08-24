@@ -17,7 +17,7 @@ Polling Agent的功能很简单：
 
 **周期性地向其他服务主动拉取需要的数据，并将数据发送到消息队列。**
 
-其结构图如下： ![图1 Central Agent结构图](http://docs.openstack.org/developer/ceilometer/_images/2-2-collection-poll.png)
+其结构图如下： ![图1 Central Agent结构图](https://github.com/qkxu/image/blob/master/2-2-collection-poll.png?raw=true)
 
 站在设计者的角度，要完成上述功能，需要处理的有如下几个基本问题：
 
