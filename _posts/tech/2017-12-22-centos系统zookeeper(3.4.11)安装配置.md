@@ -15,7 +15,7 @@ zookeeper的安装网上有一堆资料，其实比较简单，zookeeper的安�
 
   从官网上下载安装包，或者手动下载
 
-  ```wget https://mirrors.tuna.tsinghua.edu.cn/apache/zookeeper/zookeeper-3.4.11/zookeeper-3.4.11.tar.gz
+  ```
   wget https://mirrors.tuna.tsinghua.edu.cn/apache/zookeeper/zookeeper-3.4.11/zookeeper-3.4.11.tar.gz
   ```
   将安装包解压即可用，但是zookeeper要求java运行环境，并且需要jdk版本1.6以上，必须在环境上安装java。
