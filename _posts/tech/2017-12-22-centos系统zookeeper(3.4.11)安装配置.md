@@ -18,6 +18,7 @@ zookeeper的安装网上有一堆资料，其实比较简单，zookeeper的安�
   ```
   wget https://mirrors.tuna.tsinghua.edu.cn/apache/zookeeper/zookeeper-3.4.11/zookeeper-3.4.11.tar.gz
   ```
+
   将安装包解压即可用，但是zookeeper要求java运行环境，并且需要jdk版本1.6以上，必须在环境上安装java。
 
   ```
@@ -68,6 +69,7 @@ zookeeper的安装网上有一堆资料，其实比较简单，zookeeper的安�
   # Set to "0" to disable auto purge feature
   #autopurge.purgeInterval=1
   ```
+
   基本的配置说明英文都有了，重点说下dataDir与dataLogDir这两个配置
 
   dataDir：保存zookeeper数据路径
@@ -88,8 +90,6 @@ zookeeper的安装网上有一堆资料，其实比较简单，zookeeper的安�
   /opt/zookeeper/zookeeper-3.4.11/bin/zkServer.sh start
   ```
 
-  ​
-
 - **集群模式**
 
   集群模式也是最常用的模式，集群模式有效的保证了容错性，即使一台或多台zookeeper服务器挂掉，整个集群也可以对外提供服务。因为牵扯到leader选取，最后采用奇数台服务器安装zookeeper。安装都是类似的，解压到特定目录即可。集群模式主要的是配置zookeeper之间连通性，然后启动zookeeper即可。
@@ -107,8 +107,8 @@ zookeeper的安装网上有一堆资料，其实比较简单，zookeeper的安�
     server.2=10.127.2.122:2888:3888
     server.3=10.127.2.123:2888:3888
     ```
-  重点说下最后三行配置：
 
+  重点说下最后三行配置：
   最后三行提供了集群中所有服务器的信息，其中server.id=host:port:port表示了不同的zookeeper服务器的自身标识，作为集群的一部分，每一台服务器应该知道其他服务器的信息。
 
   其中id是指此台服务器的唯一标识，这整个集群中不能重复，这个id在服务器的data(dataDir参数所指定的目录)下创建一个文件名为myid的文件，这个文件的内容只有一行，指定的是自身的id值。比如，服务器“1”应该在myid文件中写入“1”。这个id必须在集群环境中服务器标识中是唯一的，且大小在1～255之间。这一样配置中，zoo1代表第一台服务器的IP地址。第一个端口号（port）是从follower连接到leader机器的端口，第二个端口是用来进行leader选举时所用的端口。所以，在集群配置过程中有三个非常重要的端口：clientPort：2181、port:2888、port:3888。
@@ -119,7 +119,6 @@ zookeeper的安装网上有一堆资料，其实比较简单，zookeeper的安�
 
   他们在启动的时候需要进行leader选举，此时server1就需要和其他两个zookeeper实例进行通信，但是，另外两个zookeeper实例还没有启动起来，因此将会产生ConnectException的信息。当server2和server3启动后就不会再有这样的警告信息了。
 
-  ​
 
 - **伪集群模式**
 
@@ -170,6 +169,7 @@ zookeeper的安装网上有一堆资料，其实比较简单，zookeeper的安�
   [Install]
   WantedBy=multi-user.target
   ```
+
   将文件放入/usr/lib/systemd/system目录下即可（不同的os版本目录有所不同）
 
   字段含义可参考”参考链接“部分的内容，着重说下其中几个字段
@@ -202,7 +202,7 @@ zookeeper的安装网上有一堆资料，其实比较简单，zookeeper的安�
 
   ```
     systemctl status zookeeper.service 
-  ● zookeeper.service - zookeeper
+    zookeeper.service - zookeeper
      Loaded: loaded (/usr/lib/systemd/system/zookeeper.service; enabled; vendor preset: disabled)
      Active: failed (Result: signal) since Fri 2017-12-22 15:18:21 CST; 6s ago
     Process: 1732 ExecStop=/opt/zookeeper/zookeeper-3.4.11/bin/zkServer.sh stop (code=exited, status=0/SUCCESS)
