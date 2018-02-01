@@ -227,7 +227,8 @@ group   notConfigGroup v2c           notConfigUser
 snmp协议使用的是UDP协议，占用的端口为161，如果防火墙没有放行此端口，会导致远端节点通过snmp协议获取不到数据（远程节点没有响应）。
 
 命令行方式：
-      1.开放端口命令： /sbin/iptables -I INPUT -p udp --dport 161 -j ACCEPT
+
+​              1.开放端口命令： /sbin/iptables -I INPUT -p udp --dport 161 -j ACCEPT
 
               2.保存：/etc/rc.d/init.d/iptables save
 
