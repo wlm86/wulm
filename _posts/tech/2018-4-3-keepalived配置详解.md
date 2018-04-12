@@ -9,21 +9,20 @@ description: keepalived 配置详解
 
 ### 1.**keepalived 简介**
 
-​	Keepalived软件起初是专为LVS负载均衡软件设计的，用来管理并监控LVS集群系统中各个服务节点的状态，后来又加入了可以实现高可用的VRRP功能。因此，Keepalived除了能够管理LVS软件外，还可以作为其他服务（例如：Nginx、Haproxy、MySQL等）的高可用解决方案软件。
+​      Keepalived软件起初是专为LVS负载均衡软件设计的，用来管理并监控LVS集群系统中各个服务节点的状态，后来又加入了可以实现高可用的VRRP功能。因此，Keepalived除了能够管理LVS软件外，还可以作为其他服务（例如：Nginx、Haproxy、MySQL等）的高可用解决方案软件。
 
-​	Keepalived软件主要是通过VRRP协议实现高可用功能的。VRRP出现的目的就是为了解决静态路由单点故障问题的，它能够保证当个别节点宕机时，整个网络可以不间断地运行。
+​      Keepalived软件主要是通过VRRP协议实现高可用功能的。VRRP出现的目的就是为了解决静态路由单点故障问题的，它能够保证当个别节点宕机时，整个网络可以不间断地运行。
 
-​	因此Keepalived主要包含两个功能：
+​      因此Keepalived主要包含两个功能：
 
-​		管理LVS负载均衡软件
+​               管理LVS负载均衡软件
+​               作为系统网络服务的高可用性（failover）
 
-　	　　作为系统网络服务的高可用性（failover）
-
-​	本文重点节点高可用功能相关的配置项（监控LVS集群系统没有用到，暂时挂起）。
+​      本文重点节点高可用功能相关的配置项（监控LVS集群系统没有用到，暂时挂起）。
 
 ### 2.**keepalived 高可用性原理**
 
-​	keepalived是以VRRP协议为实现基础的，VRRP全称Virtual Router Redundancy Protocol，即虚拟路由冗余协议。
+​      keepalived是以VRRP协议为实现基础的，VRRP全称Virtual Router Redundancy Protocol，即虚拟路由冗余协议。
 
 　　Keepalived高可用对之间是通过VRRP通信的，因此，我们从 VRRP开始了解起：
 
