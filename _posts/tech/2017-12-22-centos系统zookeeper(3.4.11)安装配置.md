@@ -2,7 +2,7 @@
 layout: post
 title: centos系统zookeeper安装配置
 category: telemetry
-tags: panko
+tags: zookeeper
 description: centos系统zookeeper安装配置
 ---
 # centos系统zookeeper安装配置#

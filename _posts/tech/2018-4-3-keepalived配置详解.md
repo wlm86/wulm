@@ -2,7 +2,7 @@
 layout: post
 title: keepalived 配置详解
 category: HA
-tags: time
+tags: keepalived
 description: keepalived 配置详解
 ---
 # keepalived 配置详解#
