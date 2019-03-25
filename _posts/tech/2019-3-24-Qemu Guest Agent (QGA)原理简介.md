@@ -47,7 +47,7 @@ setenforce 0
 systemctl start qemu-guest-agent
 ```
 
-关闭SELinux下文有说明。
+setenforce是临时关闭SELinux，下文有说明。
 
 在宿主机上测试功能：
 
