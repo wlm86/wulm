@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Qemu Guest Agent (QGA)原理简介
-category: UI
+category: VMM
 tags: VMM
 description: Qemu Guest Agent (QGA)原理简介
 ---
