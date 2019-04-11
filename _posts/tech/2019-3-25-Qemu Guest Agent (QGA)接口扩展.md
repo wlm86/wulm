@@ -205,15 +205,3 @@ description: Qemu Guest Agent (QGA)接口扩展
 参考文档：
 
 [定制qga(qemu-guest-agent)命令](https://blog.csdn.net/dwdwdw2/article/details/79313684)
-
-```
-
-```
-
-   ```
-
-   ```
-
-   ```
-
-   ```
