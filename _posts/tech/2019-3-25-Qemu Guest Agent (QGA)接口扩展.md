@@ -166,7 +166,7 @@ description: Qemu Guest Agent (QGA)接口扩展
       ```
       'returns': 'int'
       ```
-      如果想返回内置类型，则必须把改函数添加到白名单中，即在qapi-schema.json开头中添加：
+      如果想返回内置类型，则必须把该函数添加到白名单中，即在qapi-schema.json开头中添加：
       ```
       # Whitelists to permit QAPI rule violations; think twice before you
       # add to them!
@@ -188,7 +188,7 @@ description: Qemu Guest Agent (QGA)接口扩展
 
       因此推荐使用自定义结构体进行包装，例如：
 
-      ````
+      ```
       { 'command': 'guest-get-cpu-usage-rate',
         'returns': 'number' }
       
