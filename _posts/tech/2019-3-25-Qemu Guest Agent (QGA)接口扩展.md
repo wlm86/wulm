@@ -157,9 +157,41 @@ description: Qemu Guest Agent (QGA)接口扩展
       ```
 
       如果有返回值，则用returns，例如：
-
       ```
       'returns': 'GuestOSInfo'
+      ```
+      需要注意的是高版本中不建议直接返回内置类型（int，string等），用QGA官方说法是为了扩展性，后续版本在返回数据时会附带一些信息，字典类型数据便于添加和扩展。
+
+      如果直接返回内置类型会编译报错，例如：
+      ```
+      'returns': 'int'
+      ```
+      如果想返回内置类型，则必须把改函数添加到白名单中，即在qapi-schema.json开头中添加：
+      ```
+      # Whitelists to permit QAPI rule violations; think twice before you
+      # add to them!
+      { 'pragma': {
+          # Commands allowed to return a non-dictionary:
+          'returns-whitelist': [
+              'guest-file-open',
+              'guest-fsfreeze-freeze',
+              'guest-fsfreeze-freeze-list',
+              'guest-fsfreeze-status',
+              'guest-fsfreeze-thaw',
+              'guest-get-time',
+              'guest-set-vcpus',
+              'guest-sync',
+              'guest-sync-delimited',
+              'guest-get-cpu-usage-rate' ] } }
+          
+      ```
+
+      因此推荐使用自定义结构体进行包装，例如：
+
+      ````
+      { 'command': 'guest-get-cpu-usage-rate',
+        'returns': 'number' }
+      
       ```
 
    3. QGA 中内置了多种数据类型，与C语言中的数据类型对应，并支持自定义结构体，在qapi-schema.json有诸多样例，例如：
