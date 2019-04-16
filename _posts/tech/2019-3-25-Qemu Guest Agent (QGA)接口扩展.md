@@ -237,3 +237,5 @@ description: Qemu Guest Agent (QGA)接口扩展
 参考文档：
 
 [定制qga(qemu-guest-agent)命令](https://blog.csdn.net/dwdwdw2/article/details/79313684)
+
+[How to use the QAPI code generator](<https://github.com/coreos/qemu/blob/master/docs/qapi-code-gen.txt>)
