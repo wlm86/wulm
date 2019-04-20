@@ -67,7 +67,7 @@ description: linux下的watchdog
 
    2. 在/etc/modprobe.d/watchdog.conf（新增文件，名称只供参考）中，添加
       options  i6300esb heartbeat=120
-      每次重启会加载自定义配置的model。
+      每次重启会加载自定义配置的model参数设置。
 
       
 
@@ -195,7 +195,21 @@ systemctl start watchdog
 
 正常关闭喂狗程序时，也会关闭狗。
 
+### 4. 虚拟化场景下的watchdog
 
+libvirt支持为kvm/qemu客户机创建watchdog，用于当客户机内部crash时，自动会触发相应的action，action支持一下几种方式：
+
+- disabled：不使用watchdog设备
+- reset：强行重置虚拟机
+- poweroff：强行关闭虚拟机
+- pause：暂停虚拟机
+- none：只是启用watchdog，在虚拟机hang住时不执行任何操作
+
+创建相应的虚拟机，qemu会为虚拟机虚拟出i6300esb硬件狗设备，虚拟机内部可以看到相应的设备。
+
+在虚拟机中安装watchdog软件，修改watchdog应用配置，启用watchdog软件（会打开watchdog），则当虚拟机内部crash时则会触发相应的动作。
+
+当watchdog动作触发后，libvirt还会触发event事件来告知上层应用（例如nova），进而可以将此事件反馈给用户（例如发告警）。
 
 参考文档：
 
@@ -203,6 +217,4 @@ systemctl start watchdog
 
 [watchdog软件配置项说明](<http://www.sat.dundee.ac.uk/psc/watchdog/watchdog-configure.html>)
 
-```
-
-```
+[LibvirtWatchdog](<https://wiki.openstack.org/wiki/LibvirtWatchdog>)
