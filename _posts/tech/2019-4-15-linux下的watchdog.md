@@ -197,7 +197,7 @@ systemctl start watchdog
 
 ### 4. 虚拟化场景下的watchdog
 
-libvirt支持为kvm/qemu客户机创建watchdog，用于当客户机内部crash时，自动会触发相应的action，action支持一下几种方式：
+libvirt支持为kvm/qemu客户机创建watchdog，用于当客户机内部crash时，自动会触发相应的action，action支持以下几种方式：
 
 - disabled：不使用watchdog设备
 - reset：强行重置虚拟机
