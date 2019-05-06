@@ -61,8 +61,11 @@ description: linux下的watchdog
 
    当有硬件设备时，系统启动会加载相应的驱动模块，并采取默认值，如果想修改默认参数有两种方式:
 
-   1. modprobe -r i6300esb
+   1. 重新加载model
+      ```sh
+      modprobe -r i6300esb
       modprobe i6300esb heartbeat=120
+      ```
       这种方式时候是重新加载model，并设置新的参数，立即生效，重启失效
 
    2. 在/etc/modprobe.d/watchdog.conf（新增文件，名称只供参考）中，添加
@@ -130,9 +133,11 @@ int main(void)
 
 注意点：
 
-​    ioctl(g_watchdog_fd, WDIOC_SETOPTIONS, WDIOS_DISABLECARD)操作并不能关闭watchdog，或许是当前内核的bug，
+​    开启watchdog也可以用非正常方式，例如cat /dev/watchdog（会报错，只是开启，没有关闭。）
 
-​    写"v"的方式关闭watchdog，对于不同的驱动或许方式不同，本文实测i6300esb以及softdog均可，其他的硬件未测试，具体方式可以查看源代码。
+​    ioctl(g_watchdog_fd, WDIOC_SETOPTIONS, WDIOS_DISABLECARD)操作并不能关闭watchdog，或许是当前内核的bug。
+
+​    写"V"的方式关闭watchdog，对于不同的驱动或许方式不同，本文实测i6300esb以及softdog均可，其他的硬件未测试，具体方式可以查看源代码。
 
 
 
