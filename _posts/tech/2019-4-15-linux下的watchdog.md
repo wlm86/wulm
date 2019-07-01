@@ -202,7 +202,15 @@ systemctl start watchdog
 
 ### 4. 虚拟化场景下的watchdog
 
-libvirt支持为kvm/qemu客户机创建watchdog，用于当客户机内部crash时，自动会触发相应的action，action支持以下几种方式：
+libvirt支持为kvm/qemu客户机创建watchdog，用于当客户机内部crash时，自动会触发相应的action。
+
+libvirt支持模拟以下几种watchdog：
+
+- i6300esb  - 推荐的watchdog，模拟为一种pci设备，openstack层面只支持这一种（nova拼写xml中写死）。
+- ib700  - 模拟为platform设备，xml中请勿分配pci设备号(不需要拼写<address\>)。
+- diag288 - 模拟S390中的diag288设备，需要S390硬件支持。
+
+action支持以下几种方式：
 
 - disabled：不使用watchdog设备
 - reset：强行重置虚拟机
