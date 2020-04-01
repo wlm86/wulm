@@ -9,6 +9,14 @@ description: libvirt中blockcopy使用
 
 Libvirt支持blockcopy操作，将虚拟机某个盘同步到主机文件，使得主机文件与虚拟机磁盘实现动态复制功能。虚拟机热迁移场景下的存储热迁移也是基于此原理，在目的节点与源节点的块设备同步后，动态切换到目的节点。
 
+### 实验环境
+
+宿主机系统（host）：CentOS Linux release 7.4.1708 (Core)
+
+libvirt：3.2.0
+
+qemu: 2.9.0
+
 ### blockcopy过程
 
 1. copy phase
@@ -437,8 +445,6 @@ libvirt只支持根目录文件，对于非本地文件暂且不支持，解决�
   {"execute":"drive-mirror","arguments":{"device":"drive-virtio-disk0","target":"rbd:volumes/volume-4965215d-6d64-4e07-9611-a3c4ff03ce81:id=cinder","sync":"full","mode":"existing","format":"raw"}}
   ```
 
-
-
 ### python调用
 
 python调用的接口为：
@@ -479,3 +485,4 @@ conn = libvirt.open("qemu+tcp://127.0.0.1/system")
 dom = conn.lookupByUUIDString("aaba00b2-e2cf-4354-b81f-82e7e3eb775e")
 dom.blockCopy("vda","<disk type='network' device='disk'><driver name='qemu' type='raw' cache='writeback' discard='unmap'/><auth username='cinder'><secret type='ceph' uuid='457eb676-33da-42ec-9a8c-9293d545c337'/></auth><source protocol='rbd' name='cinder-volumes/485362c9-53cb-46e5-acdd-3936755f4521'><host name='192.168.204.2' port='6789'/><host name='192.168.204.3' port='6789'/><host name='192.168.204.168' port='6789'/></source></disk>","",7)
 ```
+
