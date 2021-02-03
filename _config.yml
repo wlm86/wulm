@@ -1,18 +1,18 @@
 # Site settings
-title: xqk的博客
-email: hnxqk@sina.com
+title: wlm的博客
+email: wu860403@gmail.com
 description: > # this means to ignore newlines until "baseurl:"
-  xqk的博客
+  wlm的博客
 baseurl: "" # the subpath of your site, e.g. /blog/
-url: http://qkxu.github.io # the base hostname & protocol for your site
-author: xqk
+url: http://wlm86.github.io/wulm # the base hostname & protocol for your site
+author: wlm
 # Sidebar filter
 # Choose 'tag' or 'category' as filter in sidebar.
 filter: 'category'
 recent_num: 20
 
 # Social account
-github: qkxu
+github: wlm86
 
 # avatar and Favicon
 avatar: https://avatars3.githubusercontent.com/u/26355838?v=3&u=2544d562993f806450db4d6804d612881cb46220&s=400
