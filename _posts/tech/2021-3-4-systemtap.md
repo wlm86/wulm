@@ -11,17 +11,23 @@ description:  systemtap
 1. 代码注意事项 
 
    1) "#", // , /**/都可以
+
    2) 如果多个probe需要共用变量，需要通过global声明全局变量。
       例：global list[400] 声明了一个数组，可以存储400个元素
+
    4) 通过foreach遍历元素列表
       例1：foreach ([a,b] in foo+ limit 5) { }   升序列出top5
       例2：foreach ([a,b] in foo- limit 5) { }   降序列出top5
       例3：foreach ([a-,b] in foo) { }  根据第一个元素降序排列
+
    5) @min, @max, @count, @avg, @sum可以对单一的值进行聚合操作。
       此外可以用@hist_log 或者 @hist_linear来提取数据流的直方图。
       用这两额函数处理的结果目前只允许进行打印。
+
    6) probe timer.ms(10000) 用来计时
+
    7) a <<< 1 相当于 a += 1
+
    8) entry
     ```
     #!/usr/bin/stap
@@ -41,6 +47,7 @@ description:  systemtap
 2. 目标代码内核变量 
 
    以美元符号$开头的标识符表示内核代码中的变量
+
    1) "$$vars"：  目的是打印probe函数处的每个变量
     ```
     # stap -e 'probe kernel.function("generic_file_aio_read") {printf("%s\n", $$vars); exit(); }'
@@ -94,6 +101,6 @@ description:  systemtap
          ```
    
 
-ref:
+### 3.**ref**
   https://sourceware.org/systemtap/man/stapprobes.3stap.html
   https://www.xuebuyuan.com/3204236.html 
