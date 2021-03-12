@@ -5,13 +5,12 @@ category: VIRTUAL
 tags: VIRTUAL
 description:  systemtap
 ---
-#   systemtap
-
 
 ### 1.**注意事项**
 
 1. 代码注意事项 
-   1) #, // , /**/都可以
+
+   1) "#", // , /**/都可以
    2) 如果多个probe需要共用变量，需要通过global声明全局变量。
       例：global list[400] 声明了一个数组，可以存储400个元素
    4) 通过foreach遍历元素列表
@@ -40,8 +39,9 @@ description:  systemtap
     ```
 
 2. 目标代码内核变量 
+
    以美元符号$开头的标识符表示内核代码中的变量
-   1) $$vars：  目的是打印probe函数处的每个变量
+   1) "$$vars"：  目的是打印probe函数处的每个变量
     ```
     # stap -e 'probe kernel.function("generic_file_aio_read") {printf("%s\n", $$vars); exit(); }'
     iocb=0xffff8f603bbd3e18 iov=0xffff8f603bbd3e08 nr_segs=0x1 pos=0x0 filp=? retval=? seg=? count=0xffff8f603e229b00 ppos=?/n
