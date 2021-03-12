@@ -22,7 +22,22 @@ description:  systemtap
       此外可以用@hist_log 或者 @hist_linear来提取数据流的直方图。
       用这两额函数处理的结果目前只允许进行打印。
    6) probe timer.ms(10000) 用来计时
-   7)
+   7) a <<< 1 相当于 a += 1
+   8) entry
+    ```
+    #!/usr/bin/stap
+    
+    global io_latency
+    
+    probe vfs.write.return {
+       time = gettimeofday_ns() - @entry(gettimeofday_ns())
+       io_latency <<< time
+    }
+    
+    probe end {
+       print (@hist_log(io_latency))                                                                                                                                       
+    }
+    ```
 
 2. 目标代码内核变量 
    以美元符号$开头的标识符表示内核代码中的变量
@@ -80,4 +95,5 @@ description:  systemtap
    
 
 ref:
+  https://sourceware.org/systemtap/man/stapprobes.3stap.html
   https://www.xuebuyuan.com/3204236.html 
