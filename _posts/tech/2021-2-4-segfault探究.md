@@ -17,6 +17,11 @@ description:  segfault探究
     1) bit2: 值为1表示是用户态程序内存访问越界，值为0表示是内核态程序内存访问越界 
     2) bit1: 值为1表示是写操作导致内存访问越界，值为0表示是读操作导致内存访问越界 
     3) bit0: 值为1表示没有足够的权限访问非法地址的内容，值为0表示访问的非法地址根本没有对应的页面，也就是无效地址。
+    error_code:
+    *      bit 0 == 0 means no page found, 1 means protection fault
+    *      bit 1 == 0 means read, 1 means write
+    *      bit 2 == 0 means kernel, 1 means user-mode
+    *      bit 3 == 0 means data, 1 means instruction
 
    例如错误码是6,转换成二进制就是110，这3位对应的含义如下：
    用户态些内存越界，访问的是无效的地址。
